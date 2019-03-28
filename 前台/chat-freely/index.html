@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/header.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="font-icon/iconfont.css" />
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+      	
+      	
+      	mui.plusReady(function(){
+      		plus.navigator.setStatusBarStyle("light");
+      		plus.navigator.setStatusBarBackground("#C9394A")
+      	});
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav title">
+	    <h1 class="mui-title title-color"><b>畅聊</b></h1>
+	</header>
+	
+	<nav class="mui-bar mui-bar-tab">
+	    <a class="mui-tab-item mui-active" tabIndex = 0>
+	        <span class="mui-icon iconfont  icon-liaotian"></span>
+	        <span class="mui-tab-label">畅聊</span>
+	    </a>
+	    <a class="mui-tab-item" tabIndex = 1>
+	        <span class="mui-icon iconfont  icon-iconfontzhizuobiaozhun0258"></span>
+	        <span class="mui-tab-label">通讯录</span>
+	    </a>
+	    <a class="mui-tab-item" tabIndex = 2>
+	        <span class="mui-icon iconfont  icon-zhinanzhen"></span>
+	        <span class="mui-tab-label">发现</span>
+	    </a>
+	    <a class="mui-tab-item" tabIndex = 3>
+	        <span class="mui-icon iconfont icon-mine-red"></span>
+	        <span class="mui-tab-label">我</span>
+	    </a>
+	</nav>
+	
+	<script type="text/javascript">
+		var chatFreelyArray = [
+		{
+			pageId: "chat-freely-chatlist.html",
+			pageUrl: "chat-freely-chatlist.html"
+		},
+		{
+			pageId: "chat-freely-contact.html",
+			pageUrl: "chat-freely-contact.html"
+		},
+		{
+			pageId: "chat-freely-discover.html",
+			pageUrl: "chat-freely-discover.html"
+		},
+		{
+			pageId: "chat-freely-me.html",
+			pageUrl: "chat-freely-me.html"
+		}
+		];
+		
+		
+		var chatFreelyStyle = {
+			top: "44px",
+			bottom: "50px"
+		}
+		
+		
+		mui.plusReady(function(){
+			
+			//获取当前webview对象
+			var indexwebview = plus.webview.currentWebview();
+			
+			//向当前的主页的webview添加子页的4张webview对象
+			for(var i = 0; i < chatFreelyArray.length; i++ ) {
+				var chatFreelyPage = plus.webview.create(chatFreelyArray[i].pageUrl,chatFreelyArray[i].pageId,chatFreelyStyle);
+				//隐藏webview窗口
+				chatFreelyPage.hide();
+				//追加每个子页面到当前主页
+				indexwebview.append(chatFreelyPage);
+			}
+			plus.webview.show(chatFreelyArray[0].pageId);
+			
+			//批量绑定tap事件,展示不同的页面
+			mui(".mui-bar-tab").on("tap","a",function(){
+				
+				var tabIndex = this.getAttribute("tabIndex");
+				
+				//显示点击的tab对象所对应的页面
+				plus.webview.show(chatFreelyArray[tabIndex].pageId,"fade-in",200);
+				
+				//隐藏其他不需要的页面
+				for(var i = 0; i < chatFreelyArray.length; i++ ) {
+					if(i != tabIndex){
+						plus.webview.hide(chatFreelyArray[i].pageId,"fade-out",200);
+					}
+					
+				}
+				
+				
+			})
+			
+			
+			
+		})
+	</script>
+	
+	
+	
+	
+</body>
+</html>

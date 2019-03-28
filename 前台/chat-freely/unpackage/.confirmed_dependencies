@@ -1,0 +1,28 @@
+{
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/header.css",
+			"font-icon/iconfont.css",
+			"chat-freely-chatlist.html"
+		],
+		"refer": [
+			"chat-freely-me.html",
+			"chat-freely-contact.html",
+			"chat-freely-chatlist.html",
+			"chat-freely-discover.html"
+		]
+	},
+	"chat-freely-contact.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"chat-freely-discover.html": {
+		"resources": [
+			"css/mui.min.css"
+		]
+	}
+}
